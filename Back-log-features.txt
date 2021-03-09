@@ -3,9 +3,9 @@ features we want to include for the game Dronatic
 2. attacking drones
 3. cards that either sabotage or give advantage to yourself
 
-things we need to make
-
+things we need to make:
 grid made of individual squares
-2 player objects than can move
+one player object than can move
 tokens that spawn on random squares as they are collected
 delivery missions (mission info on card)
+timer
