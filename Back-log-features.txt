@@ -1,0 +1,5 @@
+features we want to include for the game Dronatic
+1. package delivery
+2. attacking drones
+3. cards that either sabotage or give advantage to yourself
+4. 
