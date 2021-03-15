@@ -1,23 +1,26 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerMoveAim : MonoBehaviour
 {
 		public float moveSpeed = 5f;
 		public Rigidbody2D rb;
+		public Text countText;
 		public GameObject bullet;
-		public float fire_rate = 0.5f;
-		float next_fire = 0.0f;
 		public Camera cam;
 		Vector2 movement;
 		Vector2 mousePos;
+		private int count;
 		
 		void Awake()
 		{
 			  //assign rigidbody2D and camera to variables
 			  rb = GetComponent<Rigidbody2D>();
 			  cam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>() as Camera;
+				count = 0;
+				SetCountText();
 		}
     
 		void OnCollisionEnter(Collision col)
@@ -48,5 +51,18 @@ public class PlayerMoveAim : MonoBehaviour
 				rb.rotation = angle;
 		}
 		
+		void OnCollisionEnter2D(Collision2D col)
+		{
+			  if (col.gameObject.name == "Coin(Clone)") {
+						count++;
+						Destroy(col.gameObject);
+						SetCountText();
+				}
+		}
+		
+		void SetCountText()
+		{
+			  countText.text = "Count: " + count.ToString();
+		}
 		
 }
