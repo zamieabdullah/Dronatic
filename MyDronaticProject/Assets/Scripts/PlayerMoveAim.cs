@@ -34,9 +34,7 @@ public class PlayerMoveAim : MonoBehaviour
 						movement.y = Input.GetAxisRaw("Vertical");
 						//for rotation: get mouse position 
 						mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
-						if (Input.GetButtonDown("Fire1") && Time.time > next_fire) {
-								fireBullet();
-						}
+
 				}
 		}
 
@@ -50,9 +48,5 @@ public class PlayerMoveAim : MonoBehaviour
 				rb.rotation = angle;
 		}
 		
-		void fireBullet()
-		{
-			  Instantiate(bullet, transform.position, Quaternion.identity);
-		}
 		
 }
