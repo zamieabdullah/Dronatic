@@ -6,6 +6,9 @@ public class PlayerMoveAim : MonoBehaviour
 {
 		public float moveSpeed = 5f;
 		public Rigidbody2D rb;
+		public GameObject bullet;
+		public float fire_rate = 0.5f;
+		float next_fire = 0.0f;
 		public Camera cam;
 		Vector2 movement;
 		Vector2 mousePos;
@@ -31,6 +34,9 @@ public class PlayerMoveAim : MonoBehaviour
 						movement.y = Input.GetAxisRaw("Vertical");
 						//for rotation: get mouse position 
 						mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
+						if (Input.GetButtonDown("Fire1") && Time.time > next_fire) {
+								fireBullet();
+						}
 				}
 		}
 
@@ -43,4 +49,10 @@ public class PlayerMoveAim : MonoBehaviour
 				float angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg - 90f;
 				rb.rotation = angle;
 		}
+		
+		void fireBullet()
+		{
+			  Instantiate(bullet, transform.position, Quaternion.identity);
+		}
+		
 }

@@ -1231,6 +1231,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 1
   rb: {fileID: 924713352}
+  bullet: {fileID: 5737236681478890310, guid: dbf9bf48b83a047a4a245cd3e8c36fd8, type: 3}
+  fire_rate: 1
   cam: {fileID: 786121883}
 --- !u!50 &924713352 stripped
 Rigidbody2D:

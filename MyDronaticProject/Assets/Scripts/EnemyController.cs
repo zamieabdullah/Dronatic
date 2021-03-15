@@ -31,8 +31,7 @@ public class EnemyController : MonoBehaviour
     
     void OnCollisionEnter2D(Collision2D col)
     {
-        transform.Rotate(new Vector3(0, 0, (transform.rotation.eulerAngles.z + 170) % 360));
-        Debug.Log(transform.rotation.eulerAngles.z);
+        transform.Rotate(new Vector3(0, 0, (transform.rotation.eulerAngles.z + 120) % 360));
     }
 
 }
