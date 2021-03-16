@@ -23,11 +23,6 @@ public class PlayerMoveAim : MonoBehaviour
 				count = 0;
 				SetCountText();
 		}
-    
-		void OnCollisionEnter(Collision col)
-		{
-			  Debug.Log(col.collider.name);
-		}
 		
 		void Update()
 		{
@@ -60,6 +55,16 @@ public class PlayerMoveAim : MonoBehaviour
 						count++;
 						Destroy(col.gameObject);
 						SetCountText();
+				}
+		}
+		
+		void OnCollisionEnter2D(Collision2D col)
+		{
+			  if (col.gameObject.name == "Drone(Clone)") {
+					 if (count > 0) {
+							 count--;
+							 SetCountText();
+					 }
 				}
 		}
 		
