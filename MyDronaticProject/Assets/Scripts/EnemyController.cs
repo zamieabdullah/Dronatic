@@ -12,40 +12,43 @@ public class EnemyController : MonoBehaviour
     public float y_val;
     public float rot_val;
     Vector2 movement;
+    private bool coin_spawn = false;
+    
     
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-        // rb.freezeRotation = true;
+        rb.freezeRotation = true;
         movement.x = (float)Math.Cos(transform.rotation.eulerAngles.z);
         movement.y = (float)Math.Sin(transform.rotation.eulerAngles.z);
     }
-    
-    void Update()
-    {    
-        // movement.x = (float)Math.Cos(transform.rotation.eulerAngles.z);
-        // movement.y = (float)Math.Sin(transform.rotation.eulerAngles.z);
-    }
 
-    // Update is called once per frame
     void FixedUpdate()
     {
-        // rb.MovePosition(rb.position + movement * speed * Time.fixedDeltaTime);
+        rb.MovePosition(rb.position + movement * speed * Time.fixedDeltaTime);
+        if (coin_spawn) {
+            coin_spawn = false;
+        }
     }
     
     void OnCollisionEnter2D(Collision2D col)
     {
         if (col.gameObject.name == "missle(Clone)") {
-            Instantiate (coin, transform.position, Quaternion.identity);
+            if (!coin_spawn) {
+                Instantiate (coin, transform.position, Quaternion.identity);
+                coin_spawn = true;
+            }
+            
             transform.position = new Vector2(x_val, y_val);
             transform.rotation = Quaternion.Euler(0, 0, rot_val);
+            
         } else if (col.gameObject.name != "Coin(Clone)") {
             Vector2 collisionSurfaceNormal = col.GetContact(0).normal;
-            rb.velocity = Vector2.Reflect(rb.velocity, collisionSurfaceNormal);
-            movement = Vector2.Reflect(rb.velocity, collisionSurfaceNormal);
-            // transform.Rotate(new Vector3(0, 0, (float)Math.Tan(movement.x/movement.y)), Space.World);
-            // movement.x = (float)Math.Cos(transform.rotation.eulerAngles.z);
-            // movement.y = (float)Math.Sin(transform.rotation.eulerAngles.z);
+            if (Math.Abs(Vector2.Dot(collisionSurfaceNormal, new Vector2(0,1))) > 0.1) {
+                movement.y = movement.y * (-1);
+            } else if (Math.Abs(Vector2.Dot(collisionSurfaceNormal, new Vector2(1,0))) > 0.1) {
+                movement.x = movement.x * (-1);
+            }
         }
     }
 
