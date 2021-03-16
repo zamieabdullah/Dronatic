@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class PlayerMoveAim : MonoBehaviour
@@ -10,6 +11,9 @@ public class PlayerMoveAim : MonoBehaviour
 		public Text countText;
 		public Text timerText;
 		public Camera cam;
+		public Button exitEarly;
+		public Button playAgain;
+		public Button exit;
 		Vector2 movement;
 		Vector2 mousePos;
 		private int count;
@@ -70,16 +74,19 @@ public class PlayerMoveAim : MonoBehaviour
 		
 		void SetCountText()
 		{
-			  countText.text = "Count: " + count.ToString();
+			  countText.text = "Score: " + count.ToString();
 		}
 		
 		void Timer()
 		{
-				countdown -= Time.deltaTime;
-				timerText.text = "Time: " + (countdown).ToString("0");
-				if (countdown < 0)
+				if (countdown > 0)
 				{
-						UnityEditor.EditorApplication.isPlaying = false;
+						countdown -= Time.deltaTime;
+						timerText.text = "Time: " + (countdown).ToString("0");
+				} else {
+						exitEarly.gameObject.SetActive(false);
+						playAgain.gameObject.SetActive(true);
+						exit.gameObject.SetActive(true);
 				}
 		}
 		

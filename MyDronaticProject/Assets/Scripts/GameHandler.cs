@@ -6,7 +6,9 @@ using UnityEngine.UI;
 
 public class GameHandler : MonoBehaviour
 {
-
+    Text score;
+    
+    
     public void QuitGame()
     {
         #if UNITY_EDITOR
