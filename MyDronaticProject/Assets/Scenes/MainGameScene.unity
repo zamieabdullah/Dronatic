@@ -1513,7 +1513,7 @@ MonoBehaviour:
   exitEarly: {fileID: 820326447}
   playAgain: {fileID: 1820468809}
   exit: {fileID: 605920502}
-  countdown: 10
+  countdown: 60
 --- !u!50 &924713352 stripped
 Rigidbody2D:
   m_CorrespondingSourceObject: {fileID: 6801312110905087894, guid: eceaa15fff5d54d23b8e291ae7e30238,
