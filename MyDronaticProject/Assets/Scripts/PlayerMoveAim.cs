@@ -8,11 +8,12 @@ public class PlayerMoveAim : MonoBehaviour
 		public float moveSpeed = 5f;
 		public Rigidbody2D rb;
 		public Text countText;
-		public GameObject bullet;
+		public Text timerText;
 		public Camera cam;
 		Vector2 movement;
 		Vector2 mousePos;
 		private int count;
+		public float countdown = 60.0f;
 		
 		void Awake()
 		{
@@ -37,7 +38,9 @@ public class PlayerMoveAim : MonoBehaviour
 						movement.y = Input.GetAxisRaw("Vertical");
 						//for rotation: get mouse position 
 						mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
-
+            
+						Timer();
+						
 				}
 		}
 
@@ -63,6 +66,16 @@ public class PlayerMoveAim : MonoBehaviour
 		void SetCountText()
 		{
 			  countText.text = "Count: " + count.ToString();
+		}
+		
+		void Timer()
+		{
+				countdown -= Time.deltaTime;
+				timerText.text = "Time: " + (countdown).ToString("0");
+				if (countdown < 0)
+				{
+						UnityEditor.EditorApplication.isPlaying = false;
+				}
 		}
 		
 }
